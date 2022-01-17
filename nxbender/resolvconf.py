@@ -24,7 +24,8 @@ class ResolvConf(object):
         # nameserver lines
         for dns in ['dns1', 'dns2', 'dns3']:
             try:
-                resolv_conf_lines.append(f'nameserver {srv_options[dns]}')
+                if srv_options[dns] != "0.0.0.0":
+                    resolv_conf_lines.append(f'nameserver {srv_options[dns]}')
             except KeyError as err:
                 # ignore these, because the number of DNS servers returned will vary
                 pass
